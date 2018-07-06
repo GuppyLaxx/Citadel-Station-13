@@ -94,7 +94,7 @@
 	return
 
 
-
+gay
 
 
 /datum/admins/proc/Secrets_topic(item,href_list)
@@ -488,7 +488,7 @@
 			message_admins("[key_name_admin(usr)] activated AK-47s for Everyone!")
 			usr.client.ak47s()
 			sound_to_playing_players('sound/misc/ak47s.ogg')
-			
+
 		if("guns")
 			if(!check_rights(R_FUN))
 				return
