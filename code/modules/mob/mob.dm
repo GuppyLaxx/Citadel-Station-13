@@ -116,7 +116,7 @@
 // vision_distance (optional) define how many tiles away the message can be seen.
 // ignored_mob (optional) doesn't show any message to a given mob if TRUE.
 
-/atom/proc/visible_message(message, self_message, blind_message, vision_distance, ignored_mob)
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance, ignored_mob, ignored_mobtype)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -126,7 +126,7 @@
 	for(var/mob/M in get_hearers_in_view(range, src))
 		if(!M.client)
 			continue
-		if(M == ignored_mob)
+		if(M == ignored_mob || istype(M, ignored_mobtype))
 			continue
 		var/msg = message
 		if(M == src) //the src always see the main message or self message
@@ -155,11 +155,12 @@
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
 
-/mob/audible_message(message, deaf_message, hearing_distance, self_message)
+/mob/audible_message(message, deaf_message, hearing_distance, self_message, ignored_mobtype)
 	var/range = 7
 	if(hearing_distance)
 		range = hearing_distance
 	for(var/mob/M in get_hearers_in_view(range, src))
+		if(istype(M, ignored_mobtype)) continue
 		var/msg = message
 		if(self_message && M==src)
 			msg = self_message

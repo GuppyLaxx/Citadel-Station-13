@@ -177,9 +177,9 @@ proc/get_top_level_mob(var/mob/S)
 			M.show_message(message)
 
 	if(emote_type == EMOTE_AUDIBLE)
-		user.audible_message(message=message,hearing_distance=1)
+		user.audible_message(message=message,hearing_distance=1,ignored_mobtype=/mob/dead/observer/)
 	else
-		user.visible_message(message=message,self_message=message,vision_distance=1)
+		user.visible_message(message=message,self_message=message,vision_distance=1,ignored_mobtype=/mob/dead/observer/)
 	log_emote("[key_name(user)] : [message]")
 
 	message = null
